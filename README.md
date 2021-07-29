@@ -66,13 +66,13 @@ The left panel contains several parameters for custom setting, which can be cons
 > 
 >> After setting all parameters in this panel, users can start the analysis of the selected scanning (in blue) by clicking the `Apply` button.
 
-> C: Control the special components of the results
+> C: Control the special components of the results.
 >> According to the prior knowledge of sample data, users can limit the theoretical components of enumeration. \
 >> If `No dA` is checked, the enumeration will filter out components containing **unsaturated uronic acid**;\
 >> If `No aG` is checked, the enumeration will filter out components containing **Levoglucosan**;\
 >> If `No aM` is checked, the enumeration will filter out components containing **Anhydromannitol**;
 
-> D: Control the degrees of polymerization (dp)
+> D: Control the degrees of polymerization (dp).
 >> According to the prior knowledge of sample data, users can limit the theoretical components of enumeration.\
 >> The default `Min dp` and `Max dp` are set as 0 and 20. Users can input more specific range of dp.
 
@@ -91,11 +91,11 @@ Users can change the selected components by the checkboxes with the components (
 After determining the components, users can click the `Annotate` button to annotate the MS spectrum with the selected components.
 
 ### parser the sample and annotate the MS spectrum
-The analysis results is shown as follows.
+The analysis results is shown as follows:
 
 <img src="img/6.main.png">
 
-The main annotation results are shown in main panel (region A). Each annotated peak is marked as blue and labeled by the No. of component which can match this peak.\
+The main annotation results are shown in main panel (region A). Each annotated peak is marked as blue and labeled by the No. of component which can match this peak.
 1. Users can zoom, pan or reset the main annotation MS spectrum with the help of tools (region E).
 2. Users can check the detailed matched information of each annotated peaks in tips window when they hover the mouse pointer over the peak.   
 
@@ -105,11 +105,11 @@ The main components results are shown at bottom left (region C). Here show the N
 
 3. Users can return TIC view to reselect scanning or change the selected components by clicking the `TIC` or `Component` button in tools (region D).
 
-4. Users can check the matched table of this scanning by clicking the `Show table` button (region D)
+4. Users can check the matched table of this scanning by clicking the `Show table` button (region D).
 
 <img src="img/8table.png">
 
-5. Users can download the components results and annotation results by clicking the `Download` button (region F)
+5. Users can download the components results and annotation results by clicking the `Download` button (region F).
 
 <img src="img/9savetable.png">
 <img src="img/10excel1.png">
