@@ -19,24 +19,23 @@ An intelligent software for deciphering low molecular weight heparin based on Ma
  scipy
 ```
 
-## Tutorial
+## Sample data
 - - - 
-### Sample data
 Here we provide three test `mzml` data (*/sample_data/*) for users to become familiar with hepParser functions
 
-The three sample data come from [https://code.google.com/archive/p/glycresoft/downloads] , provided by GlycReSoft, which were triplicate LC/MS runs acquired using lung HS.  
+The three sample data come from https://code.google.com/archive/p/glycresoft/downloads , provided by GlycReSoft, which were triplicate LC/MS runs acquired using lung HS.  
 
-For more detailed information about sample data, please refer this paper:[https://doi.org/10.1371/journal.pone.0045474] 
+For more detailed information about sample data, please refer this paper:https://doi.org/10.1371/journal.pone.0045474 
 
-### Instructions
-
-#### Start interface
+## Tutorial
+- - - 
+### Start interface
 
 If users run hepParser successfully, the new window will be presented. The window contains two panels, main panel and tool panel.
 
 <img src="img/1load.png">
 
-#### Open file
+### Open file
 
 With the embedding of [MSConvert](https://proteowizard.sourceforge.io/download.html),  hepParser support to read two format data file (`.mzml` and `.raw` directory). Here we use a `.mzml` file as the example.
 As shown in below, users can choose `.mzml` data file by clicking '**Open file**'.
@@ -44,7 +43,7 @@ As shown in below, users can choose `.mzml` data file by clicking '**Open file**
 <img src="img/0open.png">
 <img src="img/0openmzml.png">
 
-#### Show TIC
+### Show TIC
 
 After read MS data successfully, hepParser would show the Total Ion Chromatography(TIC) in the main panel first and choose the most intensive data point automatically.
 Users can choose any scanning they are interested in by chick on it in TIC. The selected scanning were presented at the left panel, and can be deleted by clicking the `-` button on its right.
@@ -53,7 +52,7 @@ Then, users can click any of them at left panel to do the next analysis.
 
 <img src="img/2TIC.png">
 
-#### Set parameters
+### Set parameters
 
 When users select one scanning (Here is `312`), hepParser would show the original mass spectrum in the main panel and title it with the scan number.
 The left panel contains several parameters for custom setting, which can be considered as four parts:
@@ -79,7 +78,7 @@ The left panel contains several parameters for custom setting, which can be cons
 
 <img src="img/3MS.png">
 
-#### Analyse MS data
+### Analyse MS data
 
 Once users start the analysing of selected scaning, hepParser would show the progress bar of the analysis, and show the possible existent components in sample.
 
@@ -91,7 +90,7 @@ The default checked components are the results recommended by hepParser.
 Users can change the selected components by the checkboxes with the components (region A), or batch add or delete through `Check all` or `Recommend`(region B).\
 After determining the components, users can click the `Annotate` button to annotate the MS spectrum with the selected components.
 
-#### parser the sample and annotate the MS spectrum
+### parser the sample and annotate the MS spectrum
 The analysis results is shown as follows.
 
 <img src="img/6.main.png">
@@ -102,7 +101,7 @@ The main annotation results are shown in main panel (region A). Each annotated p
 
 <img src="img/7zoomTip.png">
 
-The main components results are shown at bottom left (region C). Here show the No., composition, matched score and $-log_{10}p_{adj}$ of each component.
+The main components results are shown at bottom left (region C). Here show the No., composition, matched score and -log<sub>10</sub>p<sub>adj</sub> of each component.
 
 3. Users can return TIC view to reselect scanning or change the selected components by clicking the `TIC` or `Component` button in tools (region D).
 
