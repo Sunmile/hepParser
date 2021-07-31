@@ -227,8 +227,6 @@ def get_aligned_isp(isptopic_list, delta):
         new_dict = {}
         tmp_dict = isptopic_list[i]
         for mass in tmp_dict.keys():
-            if abs(mass-421.00104)<0.0001:
-                a = 1
             mz = tmp_dict[mass][0]
             tmp_int = tmp_dict[mass][1]
             new_mz = [np.round(x+delta,5) for x in mz]

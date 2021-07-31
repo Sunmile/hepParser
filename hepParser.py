@@ -314,12 +314,14 @@ class MainWindow(QMainWindow):
         self.scan_widget = {}
         self.scan_com_button = {}
         self.chk_list = []
+        self.space = 0
         # self.lose_ion = ["HSO_3", 'NH_2', 'NH_{2}SO_3', 'COOH']
         self.lose_ion = ["SO_3", 'NH', 'NHSO_3', 'COO']
         if platform.system() != "Windows":
             self.x_space = 15
             self.y_space = 36
             self.anno_text_size = 13
+            self.space =5
             print("OS", platform.system())
 
     def _init_data(self):
@@ -479,6 +481,7 @@ class MainWindow(QMainWindow):
         self.edit_ppm = QLineEdit()
         self.edit_ppm.setStyleSheet("QLabel{background:none}")
         self.edit_ppm.setPlaceholderText(str(self.ppm))
+        self.edit_ppm.setText(str(self.ppm))
         self.edit_ppm.textEdited.connect(self.ppm_text_changed)
         self.edit_ppm.setObjectName("font_gray")
         self.edit_ppm.setFixedWidth(50)
@@ -515,6 +518,7 @@ class MainWindow(QMainWindow):
         self.dp_min = QLineEdit()
         self.dp_min.setStyleSheet("QLabel{background:none}")
         self.dp_min.setPlaceholderText(str(0))
+        self.dp_min.setText(str(0))
         self.dp_min.setObjectName("font_gray")
         self.dp_min.setFixedWidth(60)
         self.dp_region2 = QWidget()
@@ -528,6 +532,7 @@ class MainWindow(QMainWindow):
         self.dp_max = QLineEdit()
         self.dp_max.setStyleSheet("QLabel{background:none}")
         self.dp_max.setPlaceholderText(str(20))
+        self.dp_max.setText(str(20))
         self.dp_max.setObjectName("font_gray")
         self.dp_max.setFixedWidth(60)
         self.dp_region1_horizontalLayout.addWidget(self.dp_info)
@@ -1044,7 +1049,7 @@ class MainWindow(QMainWindow):
             right_structs.append(self.right_struct[i][0])
             right_scores.append(self.right_struct[i][1])
             right_p.append(self.right_struct[i][2])
-        self.struct_df = pd.DataFrame({"id": right_is, "composition": right_structs, "score": right_scores, "log_p_adj":right_p})
+        self.struct_df = pd.DataFrame({"id": right_is, "components": right_structs, "score": right_scores, "-log_p_adj":right_p})
         for i in range(self.right_struct_btn_verticalLayout.count()):
             self.right_struct_btn_verticalLayout.itemAt(i).widget().setDisabled(True)
             self.right_struct_region_verticalLayout.itemAt(i).widget().setDisabled(True)
@@ -1062,13 +1067,13 @@ class MainWindow(QMainWindow):
             for j in range(len(label_list)):
                 if label_list[j][4] != 1:
                     self.orgAx.annotate(s="+" + str(label_list[j][4] - 1), xy=key,
-                                        xytext=(-(self.x_space), +(10 + self.y_space * j + self.y_space * 0.5)),
+                                        xytext=(-(self.x_space+self.space), +(10+self.space + self.y_space * j + self.y_space * 0.5)),
                                         textcoords='offset pixels',
                                         color='black', ha='center', va='bottom',
                                         fontsize=8, fontweight='extra bold')
 
                 a = self.orgAx.annotate(s=str(label_list[j][-2]), xy=key,
-                                        xytext=(+0, +(10 + self.y_space * j)),
+                                        xytext=(+self.space, +(10+self.space + self.y_space * j)),
                                         textcoords='offset pixels',
                                         color='white', ha='center', va='bottom',
                                         fontsize=self.anno_text_size, fontweight='extra bold',
@@ -1077,7 +1082,7 @@ class MainWindow(QMainWindow):
                                                   ec=self.colors[label_list[j][-2]],
                                                   lw=1))
                 self.orgAx.annotate(s=str(label_list[j][2]) + "-", xy=key,
-                                    xytext=(+(self.x_space), +(10 + self.y_space * j + self.y_space * 0.5)),
+                                    xytext=(+(self.x_space+self.space), +(10+self.space + self.y_space * j + self.y_space * 0.5)),
                                     textcoords='offset pixels',
                                     color='black', ha='center', va='bottom',
                                     fontsize=8, fontweight='extra bold')
@@ -1590,7 +1595,7 @@ class MainWindow(QMainWindow):
                     save_com.append(self.label_info[1][x])
                 save_com = [str(x) for x in save_com]
                 tmp_df = self.df
-                tmp_df['Components'] = tmp_df['Components'].astype('string')
+                tmp_df['Components'] = tmp_df['Components'].astype('str')
                 save_df = self.df[tmp_df.Components.isin(save_com)]
                 writer = pd.ExcelWriter(selectedDir)
                 save_df.to_excel(writer, sheet_name='annotation', index=None)

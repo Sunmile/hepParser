@@ -97,8 +97,8 @@ The analysis results is shown as follows:
 
 The main annotation results are shown in main panel (region A). Each annotated peak is marked as blue and labeled by the No. of component which can match this peak.
 1. Users can zoom, pan or reset the main annotation MS spectrum with the help of tools (region E).
-2. Users can check the detailed matched information of each annotated peaks in tips window when they hover the mouse pointer over the peak.   
-
+2. Users can check the detailed matched information of each annotated peaks in tips window when they hover the cursor over the peak.   
+ 
 <img src="img/7zoomTip.png">
 
 The main components results are shown at bottom left (region C). Here show the No., composition, matched score and -log<sub>10</sub>p<sub>adj</sub> of each component.

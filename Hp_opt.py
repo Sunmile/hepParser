@@ -8,6 +8,7 @@ import itertools
 from pprint import pprint as pl
 import pickle as pk
 import os
+import operator as opt
 from time import time
 import math
 from rpy2.robjects.packages import importr
@@ -163,7 +164,7 @@ def get_one_Z_isotopic(MZ_list, fit_list, dict_list, ppm=10, Z=1, isotopic_num=5
                         tmp_com.pop(M)
                     dict[M] = [mass_l, isotopic_record[i]]
                     for x in tmp_vis:
-                        visited_list[x] = 1
+                        visited_list[x] = 0
     if Z == 2:
         dict_list[0] = tmp_com
     if Z == 4:
@@ -631,25 +632,25 @@ def get_KL(v1, v2, is_P=0):
     return KL
 
 
-def get_one_mass_comp(mass, z, ppm, the_HP):
-    atom_list = the_HP[1]
-    comp_mass = mass * z + z
-    win = comp_mass * ppm * 0.000001
-    result = []
-    for m in atom_list.keys():
-        one_atom = atom_list[m][0]
-        all_list, lost_record = generate_new_composition([one_atom], 5)
-        # all_list, lost_record = [one_atom], [[0, 0, 0, 0]]
-        for i in range(len(all_list)):
-            x = all_list[i]
-            losted = lost_record[i]
-            mass = get_molecular_mass(x)
-            if abs(mass - comp_mass) <= win:
-                comp = the_HP[0][m][0]
-                result.append([comp, losted])
-                print(comp_mass, mass)
-                print(comp, losted)
-    return result
+# def get_one_mass_comp(mass, z, ppm, the_HP):
+#     atom_list = the_HP[1]
+#     comp_mass = mass * z + z
+#     win = comp_mass * ppm * 0.000001
+#     result = []
+#     for m in atom_list.keys():
+#         one_atom = atom_list[m][0]
+#         all_list, lost_record = generate_new_composition([one_atom], 5)
+#         # all_list, lost_record = [one_atom], [[0, 0, 0, 0]]
+#         for i in range(len(all_list)):
+#             x = all_list[i]
+#             losted = lost_record[i]
+#             mass = get_molecular_mass(x)
+#             if abs(mass - comp_mass) <= win:
+#                 comp = the_HP[0][m][0]
+#                 result.append([comp, losted])
+#                 print(comp_mass, mass)
+#                 print(comp, losted)
+#     return result
 
 
 def get_JS(v1, v2, w1=0.5, w2=0.5):
@@ -1193,18 +1194,6 @@ def calculate_all_hp_score(the_spectra, dict_list, the_HP, max_int,chb_dA=False,
         print("ID\t" + str(count) + "\t")
         x = the_mass_list[i]
         one_comp = the_comp_list[i]
-        if chb_dA:
-            if one_comp[0] >0:
-                continue
-        if chb_aG:
-            if one_comp[-2]>0:
-                continue
-        if chb_aM:
-            if one_comp[-1]>0:
-                continue
-        tmp_dp= sum(one_comp)-one_comp[3]-one_comp[4]
-        if tmp_dp < min_dp or tmp_dp> max_dp:
-            continue
         one_atom = the_atom_list[i]
         the_isp = the_spectra[0][i]
         lost_comp = the_spectra[1][i]
@@ -1213,6 +1202,22 @@ def calculate_all_hp_score(the_spectra, dict_list, the_HP, max_int,chb_dA=False,
         com_score = compared_score(exp_isp_01, the_isp_01)
         if com_score < 2:
             # print(com_score)
+            pass_count += 1
+            continue
+        if chb_dA:
+            if one_comp[0] >0:
+                pass_count += 1
+                continue
+        if chb_aG:
+            if one_comp[-2]>0:
+                pass_count += 1
+                continue
+        if chb_aM:
+            if one_comp[-1]>0:
+                pass_count += 1
+                continue
+        tmp_dp= sum(one_comp)-one_comp[3]-one_comp[4]
+        if tmp_dp < min_dp or tmp_dp> max_dp:
             pass_count += 1
             continue
         score, match_list, match_theo_list, score_list, score_mass, match_lost_list, match_z_list \
